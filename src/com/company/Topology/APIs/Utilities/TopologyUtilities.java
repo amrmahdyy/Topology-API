@@ -7,11 +7,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public interface TopologyUtilities {
-    void currentTopologies(ArrayList<Topology>topologies);
+    Boolean readJson(String path);
 
-    Topology getTopology(ArrayList<Topology>topologies,String id);
+    void currentTopologies();
 
-    boolean deleteTopology(ArrayList<Topology> topologies,String id);
+    Topology getTopology(String id);
+
+    boolean deleteTopology(String id);
 
     ArrayList<Component> getAllDevicesOfTopology(Topology topology);
 

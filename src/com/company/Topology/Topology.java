@@ -17,6 +17,8 @@ public class Topology {
     }
 
     public ArrayList<Component> getComponents() {
+        if(components==null)
+            return null;
         return components;
     }
 

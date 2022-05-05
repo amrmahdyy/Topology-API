@@ -13,7 +13,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class JsonParser {
+public class JsonParser implements ParserUtilities{
     ArrayList<Topology>topologies=new ArrayList<>();
     /**
      * Creating Topology by reading from disk and loading all topologies on main memory
@@ -61,7 +61,7 @@ public class JsonParser {
                     }
 //                if type is resistor, initialize resistor object
                     else if(type.equals("nmos")){
-                        System.out.println(type);
+
                         HashMap<String,String>ml=new HashMap<>();
 
                         netList.put("drain",currComponent.getJSONObject("netlist").get("drain").toString());
@@ -93,5 +93,8 @@ public class JsonParser {
             return false;
         }
         return true;
+    }
+    public ArrayList<Topology>getTopologies(){
+        return this.topologies;
     }
 }

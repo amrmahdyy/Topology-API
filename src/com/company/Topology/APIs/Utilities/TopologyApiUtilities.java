@@ -7,6 +7,7 @@ import com.company.Topology.Topology;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -39,6 +40,8 @@ public class TopologyApiUtilities implements TopologyUtilities   {
                     JSONObject currComponent=components.getJSONObject(j);
                     String componentId=currComponent.getString("id");
                     String type=currComponent.getString("type");
+
+
                     HashMap<String,String>netList=new HashMap<>();
 
 
@@ -54,6 +57,7 @@ public class TopologyApiUtilities implements TopologyUtilities   {
                         resistance.put("max",currComponent.getJSONObject("resistance").get("max").toString());
 
                         Resistor resistor = new Resistor(componentId, type, netList);
+
 
                         resistor.setResistance(resistance);
 
@@ -94,6 +98,77 @@ public class TopologyApiUtilities implements TopologyUtilities   {
         }
         return true;
     }
+
+    public Boolean writeJson(Topology topology,String path){
+        JSONArray topologyArray=new JSONArray();
+        JSONObject newTopology=new JSONObject();
+        JSONArray componentsArray=new JSONArray();
+
+        String topologyId=topology.getId();
+        ArrayList<Component>components = topology.getComponents();
+        HashMap<String,String>netList;
+
+        newTopology.put("id",topologyId);
+        for(Component component:components){
+            JSONObject newComponent=new JSONObject();
+
+            String componentId=component.getId();
+            String componentType=component.getType();
+
+            newComponent.put("type",componentType);
+            newComponent.put("id",componentId);
+            if(componentType.equals("resistor")){
+                JSONObject resistorObj=new JSONObject();
+                Resistor resistor=(Resistor)component;
+
+                newComponent.put("resistance",resistorObj);
+
+                resistorObj.put("default",resistor.getResistance().get("default"));
+                resistorObj.put("min",resistor.getResistance().get("min"));
+                resistorObj.put("max",resistor.getResistance().get("max"));
+
+                JSONObject netListObj=new JSONObject();
+
+                netListObj.put("t1",component.getNetList().get("t1"));
+                netListObj.put("t2",component.getNetList().get("t2"));
+
+                newComponent.put("netlist",netListObj);
+            }
+            else if(componentType.equals("nmos")){
+                JSONObject mlObj=new JSONObject();
+                Nmos nmos=(Nmos)component;
+
+                newComponent.put("m(l)",mlObj);
+                mlObj.put("default",nmos.getM1().get("default"));
+                mlObj.put("min",nmos.getM1().get("min"));
+                mlObj.put("max",nmos.getM1().get("max"));
+
+                JSONObject netListObj=new JSONObject();
+
+                netListObj.put("drain",component.getNetList().get("drain"));
+                netListObj.put("gate",component.getNetList().get("gate"));
+                netListObj.put("source",component.getNetList().get("source"));
+
+                newComponent.put("netlist",netListObj);
+            }
+
+           // componentsArray.put("components",newComponent);
+            componentsArray.put(newComponent);
+        }
+        newTopology.put("components",componentsArray);
+        topologyArray.put(newTopology);
+        try{
+            FileWriter foe=new FileWriter(path+"topology-"+topology.getId()+".json");
+            foe.write(topologyArray.toString());
+            foe.flush();
+            foe.close();
+        }
+        catch(IOException ioe){
+            System.out.println("ERROR in writing topology "+ioe);
+        }
+        return true;
+    }
+
     public ArrayList<Topology>getTopologies(){
         return this.topologies;
     }

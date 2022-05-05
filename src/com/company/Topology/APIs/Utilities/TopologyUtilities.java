@@ -9,6 +9,8 @@ import java.util.HashMap;
 public interface TopologyUtilities {
     Boolean readJson(String path);
 
+    Boolean writeJson(Topology topology,String path);
+
     void currentTopologies();
 
     Topology getTopology(String id);

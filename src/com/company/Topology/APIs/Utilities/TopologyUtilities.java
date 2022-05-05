@@ -1,4 +1,4 @@
-package com.company.Topology.APIs;
+package com.company.Topology.APIs.Utilities;
 
 import com.company.Topology.Components.Component;
 import com.company.Topology.Topology;
@@ -6,7 +6,7 @@ import com.company.Topology.Topology;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public interface TopologyAPI {
+public interface TopologyUtilities {
     void currentTopologies(ArrayList<Topology>topologies);
 
     Topology getTopology(ArrayList<Topology>topologies,String id);

@@ -1,4 +1,4 @@
-package com.company.Topology.APIs;
+package com.company.Topology.APIs.Parser;
 
 import com.company.Topology.Components.Component;
 import com.company.Topology.Components.Nmos;
@@ -13,7 +13,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class JsonParser implements ParserUtilities{
+public class TopologyParserApi implements ParserUtilities{
     ArrayList<Topology>topologies=new ArrayList<>();
     /**
      * Creating Topology by reading from disk and loading all topologies on main memory

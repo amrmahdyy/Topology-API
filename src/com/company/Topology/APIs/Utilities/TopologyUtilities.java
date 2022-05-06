@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public interface TopologyUtilities {
-    Boolean readJson(String path);
+    ArrayList<Topology> readJson(String path);
 
     Boolean writeJson(Topology topology,String path);
 

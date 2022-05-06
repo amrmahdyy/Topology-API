@@ -22,7 +22,7 @@ public class TopologyApiUtilities implements TopologyUtilities   {
      * @param  path the json file path
      * @return      true on successfully reading and false on failure
      */
-    public  Boolean readJson(String path){
+    public  ArrayList<Topology> readJson(String path){
         try {
             String jsonInString=new String(Files.readAllBytes(Paths.get(path)));
 
@@ -90,13 +90,12 @@ public class TopologyApiUtilities implements TopologyUtilities   {
                 }
                 topologies.add(topology);
             }
-
+            return this.topologies;
         }
         catch(IOException ioe){
             System.out.println("Error in Reading Json file "+ioe);
-            return false;
+            return null;
         }
-        return true;
     }
 
     public Boolean writeJson(Topology topology,String path){

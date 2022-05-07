@@ -53,34 +53,30 @@ class TopologyApiUtilitiesTest {
 //        Adding component to topology
         expectedTopology.addComponent(nmos);
     }
-//    @Test
-//    void readJson(){
-//        Topology topology=TopologyApi.createTopologyApi().topologyApiUtilities.readJson(inputPath).get(0);
-//        Assertions.assertEquals(expectedTopology,topology);
-//    }
+    @Test
+    void readJson(){
+        Topology topology=TopologyApi.createTopologyApi().topologyApiUtilities.readJson(inputPath).get(0);
+        Assertions.assertEquals(expectedTopology,topology);
+    }
 
 //    reading all topologies from .json file and test if the number of topologies loaded into memory is correct or not
     @Test
     void getTopologies(){
-        ArrayList<Topology> topologies=TopologyApi.createTopologyApi().topologyApiUtilities.readJson(inputPath);
-        Assertions.assertEquals(1,topologies.size());
+        Assertions.assertEquals(1,TopologyApi.createTopologyApi().topologyApiUtilities.getTopologies().size());
     }
     @Test
     void deleteTopology(){
-        TopologyApi topologyApi=TopologyApi.createTopologyApi();
-        Topology topology=topologyApi.topologyApiUtilities.readJson(inputPath).get(0);
 //        Deleting existing topology
-        Assertions.assertEquals(true,topologyApi.topologyApiUtilities.deleteTopology("top1"));
+        Assertions.assertEquals(true,TopologyApi.createTopologyApi().topologyApiUtilities.deleteTopology("top1"));
 //        deleting a deleted topology
-        Assertions.assertFalse(topologyApi.topologyApiUtilities.deleteTopology("top1"));
+        Assertions.assertFalse(TopologyApi.createTopologyApi().topologyApiUtilities.deleteTopology("top1"));
 //        Deleting Unexisting topology
-        Assertions.assertFalse(topologyApi.topologyApiUtilities.deleteTopology("existing ID"));
+        Assertions.assertFalse(TopologyApi.createTopologyApi().topologyApiUtilities.deleteTopology("existing ID"));
     }
 
     @Test
     void getTopology(){
         TopologyApi topologyApi=TopologyApi.createTopologyApi();
-        Topology topology=topologyApi.topologyApiUtilities.readJson(inputPath).get(0);
 //        checking if a topology with top1 Id exists in The topology that is stored in memory
         Assertions.assertNotNull(topologyApi.topologyApiUtilities.getTopology("top1"));
 

@@ -12,6 +12,18 @@ public class Component {
         this.type=type;
         this.netList=netList;
     }
+    @Override
+    public boolean equals(Object obj){
+        if(obj.getClass()!=this.getClass())
+            return false;
+        if(!this.netList.equals(((Component) obj).getNetList()))
+            return false;
+        if(!this.type.equals(((Component) obj).getType()))
+            return false;
+        if(!this.id.equals(((Component) obj).getId()))
+            return false;
+        return true;
+    }
     public String getId() {
         return id;
     }

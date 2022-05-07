@@ -1,17 +1,16 @@
 package com.company.Topology.Tests;
 
 import com.company.Topology.APIs.TopologyApi;
-import com.company.Topology.APIs.Utilities.TopologyApiUtilities;
+import com.company.Topology.Components.Component;
 import com.company.Topology.Components.Nmos;
 import com.company.Topology.Components.Resistor;
 import com.company.Topology.Topology;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class TopologyApiUtilitiesTest {
     static Topology expectedTopology;
      static String inputPath="/Users/test/Desktop/Web development projects/Master Micro assignment/Topology-API/src/com/company/Topology/Resources/topology.json";
@@ -54,6 +53,7 @@ class TopologyApiUtilitiesTest {
         expectedTopology.addComponent(nmos);
     }
     @Test
+    @Order(1)
     void readJson(){
         Topology topology=TopologyApi.createTopologyApi().topologyApiUtilities.readJson(inputPath).get(0);
         Assertions.assertEquals(expectedTopology,topology);
@@ -61,10 +61,32 @@ class TopologyApiUtilitiesTest {
 
 //    reading all topologies from .json file and test if the number of topologies loaded into memory is correct or not
     @Test
+    @Order(2)
     void getTopologies(){
         Assertions.assertEquals(1,TopologyApi.createTopologyApi().topologyApiUtilities.getTopologies().size());
     }
+
+    @ Test
+    @Order(3)
+    void getNetList(){
+        TopologyApi topologyApi=TopologyApi.createTopologyApi();
+        System.out.println(topologyApi.topologyApiUtilities.getTopologies().size());
+
+//        Select Topology
+        Topology topology=topologyApi.topologyApiUtilities.getTopology("top1");
+
+        ArrayList<Component> components=topologyApi.topologyApiUtilities.getAllDevicesOfTopology(topology);
+        System.out.println(components.size());
+        Component component=topologyApi.topologyApiUtilities.getComponent(components,"res1");
+
+//      Creating exceptedNetList for resistor component
+        HashMap<String,String>exceptedResistorNetList=new HashMap<>();
+        exceptedResistorNetList.put("t1","vdd");
+        exceptedResistorNetList.put("t2","n1");
+        Assertions.assertEquals(component.getNetList(),exceptedResistorNetList);
+    }
     @Test
+    @Order(5)
     void deleteTopology(){
 //        Deleting existing topology
         Assertions.assertEquals(true,TopologyApi.createTopologyApi().topologyApiUtilities.deleteTopology("top1"));
@@ -75,6 +97,7 @@ class TopologyApiUtilitiesTest {
     }
 
     @Test
+    @Order(4)
     void getTopology(){
         TopologyApi topologyApi=TopologyApi.createTopologyApi();
 //        checking if a topology with top1 Id exists in The topology that is stored in memory
@@ -83,4 +106,5 @@ class TopologyApiUtilitiesTest {
 //      checking if a topology with invalid Id exists in The topology that is stored in memory
         Assertions.assertNull(topologyApi.topologyApiUtilities.getTopology("top3"));
     }
+
 }

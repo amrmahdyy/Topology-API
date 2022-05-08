@@ -1,6 +1,7 @@
 # Topology API
 ## Table of contents
 + [About](#about)
++ [Why Java](#whyJava)
 + [Functional requirments](#functionalRequirments)
 + [Used Technologies](#usedTechnologies)
 + [Topology API Documentation](#topologyApiDocs)
@@ -8,6 +9,14 @@
 + + [Usage](#usage)
  ## 🤷🏻‍♂️ About <a name = "about"></a>
  Provide the functionality to access, manage and store device topologies.
+ ## 👾 Why Java <a name = "whyJava"></a>
+1. Java is easy to learn.
+2. Java was designed to be easy to use and is therefore easy to write, compile, debug, and learn than other programming languages.
+3. Java is object-oriented.
+This allows you to create modular programs and reusable code.
+
+Java is platform-independent.
+One of the most significant advantages of Java is its ability to move easily from one computer system to another. The ability to run the same program on many different systems is crucial to World Wide Web software, and Java succeeds at this by being platform-independent at both the source and binary levels.
  ## 👮🏻‍♂️ Functional requirments <a name="functionalRequirments"></a>
 1. Read a topology from a given JSON file and store it in the memory.
 2. Write a given topology from the memory to a JSON file.

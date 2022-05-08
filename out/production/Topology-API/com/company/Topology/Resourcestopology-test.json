@@ -1,1 +1,13 @@
-[{"components":[{"netlist":{"t1":"capacitor","t2":"vss"},"id":"5","type":"resistor","resistance":{"default":"20","min":"1","max":"500"}}],"id":"test"}]
+[
+  {
+  "components":
+  [
+    {"netlist":
+    {"t1":"capacitor","t2":"vss"},
+      "id":"5",
+      "type":"resistor",
+      "resistance":
+      {"default":"20","min":"1","max":"500"}}],
+    "id":"test"
+  }
+]

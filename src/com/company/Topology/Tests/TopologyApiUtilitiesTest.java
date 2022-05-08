@@ -70,13 +70,11 @@ class TopologyApiUtilitiesTest {
     @Order(3)
     void getNetList(){
         TopologyApi topologyApi=TopologyApi.createTopologyApi();
-        System.out.println(topologyApi.topologyApiUtilities.getTopologies().size());
 
 //        Select Topology
         Topology topology=topologyApi.topologyApiUtilities.getTopology("top1");
 
         ArrayList<Component> components=topologyApi.topologyApiUtilities.getAllDevicesOfTopology(topology);
-        System.out.println(components.size());
         Component component=topologyApi.topologyApiUtilities.getComponent(components,"res1");
 
 //      Creating exceptedNetList for resistor component

@@ -3,9 +3,9 @@ package com.company.Topology.Components;
 import java.util.HashMap;
 
 public class Component {
-    private String id;
+    private final String id;
 
-    private String type;
+    private final String type;
     private HashMap<String,String>netList;
     public Component(String id,String type,HashMap<String,String>netList){
         this.id=id;
@@ -20,9 +20,7 @@ public class Component {
             return false;
         if(!this.type.equals(((Component) obj).getType()))
             return false;
-        if(!this.id.equals(((Component) obj).getId()))
-            return false;
-        return true;
+        return this.id.equals(((Component) obj).getId());
     }
     public String getId() {
         return id;

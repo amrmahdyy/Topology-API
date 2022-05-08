@@ -262,7 +262,7 @@ public class TopologyApiUtilities implements TopologyUtilities   {
         int order=1;
         for(String name:netList.keySet()){
             String value=netList.get(name);
-            System.out.println(String.valueOf(order++)+")"+" "+name+" : "+value);
+            System.out.println(order++ +")"+" "+name+" : "+value);
         }
     }
 }

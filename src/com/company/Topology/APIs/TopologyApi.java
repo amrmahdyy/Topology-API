@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class TopologyApi {
     public TopologyApiUtilities topologyApiUtilities=new TopologyApiUtilities();
 
-    private static TopologyApi topologyApi=new TopologyApi();
+    private static final TopologyApi topologyApi=new TopologyApi();
 
     private TopologyApi(){}
 
